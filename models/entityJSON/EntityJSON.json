@@ -1,0 +1,6 @@
+{
+    "User":{
+        "table_name":"Users",
+        "handlers":"UserHandler"
+    }
+}

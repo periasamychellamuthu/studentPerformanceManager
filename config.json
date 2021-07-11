@@ -1,0 +1,31 @@
+{
+    "db_config":{
+        "host": "localhost",
+        "port": "3306",
+        "database": "MarkManagementSystem",
+        "user": "root",
+        "password": ""
+    },
+    "app_name": "Newsletter",
+    
+    "EXTERNAL_PROTOCOL": "http",
+    "EXTERNAL_HOST": "127.0.0.1",
+    "EXTERNAL_PORT": "3500",
+    
+    "secret": "secret_here",
+    "sessionSecret": "top_secret_session",
+
+    "i18n_path" : "./",
+    
+    "MODULES": {
+        "USERS": true,
+        "AUTH": true,
+        "FEEDS": true
+    },
+
+    "BASIC_AUTH_STRATEGY": true,
+    "JWT_STRATEGY": true,
+    
+    "TOKEN_LENGTH": 256,
+    "TOKEN_TIME": 3600
+}
