@@ -1,6 +1,33 @@
 {
     "User":{
         "table_name":"Users",
-        "handlers":"UserHandler"
+        "handlers":"UserEntityHandler",
+        "fields":[
+            {
+                "name":"id",
+                "relational_mapping":"Users.ID",
+                "is_identifier":true
+            },
+            {
+                "name":"name",
+                "relational_mapping":"Users.NAME"
+            },
+            {
+                "name":"user_name",
+                "relational_mapping":"Users.USER_NAME"
+            },
+            {
+                "name":"email_address",
+                "relational_mapping":"Users.EMAIL_ADDRESS"
+            },
+            {
+                "name":"phone_number",
+                "relational_mapping":"Users.CONTACT_NUMBER"
+            },
+            {
+                "name":"password",
+                "relational_mapping":"Users.PASS_WORD"
+            }
+        ]
     }
 }

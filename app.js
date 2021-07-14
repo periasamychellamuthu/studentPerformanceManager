@@ -3,12 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var db_connect = require('./models/db/db_connect');
 var routes = require('./routes/index');
+var mysqlConnect = require('./models/db/MySqlConnect');
 
 var app = express();
 
-db_connect.getDBConexion()
+mysqlConnect.init()
 .then( (db) => {
       console.log(db+"entered in engine setup");
 

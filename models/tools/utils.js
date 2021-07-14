@@ -73,6 +73,13 @@ exports.validatePermission = function (permission) {
 };
 
 exports.getHandlerInstance = function(request,response,entity){
-    var entityName=entity.name;
-    var handlerF
+    var entityJsons = require('../entityJSON/EntityJSON.json')
+   if(entity && entity.name){
+        request.entity = entityJsons[entity.name];
+        const handler =  require('../handler/'+request.entity.handlers);
+        var entityHandler = new handler();
+        entityHandler.handleAPICall(request,response);
+   }else{
+        request.entity = null;
+   }
 }
