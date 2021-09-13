@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "nodemon --inspect ./bin/www",
     "stop": "lsof -ti :3000 | xargs kill"
   },
   "dependencies": {
@@ -12,7 +12,15 @@
     "express": "~4.17.1",
     "http-errors": "~1.8.0",
     "jade": "~1.11.0",
-    "morgan": "~1.10.0"
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "~1.10.0",
+    "multer": "^1.4.3",
+    "@comment multer":"used to parse formdata on request",       
+    "mysql": "^2.18.1",
+    "node-querybuilder": "^2.1.1",
+    "passport": "^0.4.1",
+    "querybuilder": "^1.1.0",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

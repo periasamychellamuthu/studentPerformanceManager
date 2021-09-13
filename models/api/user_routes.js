@@ -17,11 +17,22 @@
      }
      app.get(constants.API_PATH + constants.API_VERSION + '/users',function (req, res, next) {
         utils.getHandlerInstance(req,res,entityDetails);
-        console.log("get called");
+      });
+      app.get(constants.API_PATH + constants.API_VERSION + '/users/:userId',function (req, res, next) {
+        utils.getHandlerInstance(req,res,entityDetails);
       });
       app.post(constants.API_PATH + constants.API_VERSION + '/users',function (req, res, next) {
         utils.getHandlerInstance(req,res,entityDetails);
-        console.log();
+      });
+      app.put(constants.API_PATH + constants.API_VERSION + '/users/:userId',function (req, res, next) {
+        utils.getHandlerInstance(req,res,entityDetails);
+      });
+      app.delete(constants.API_PATH + constants.API_VERSION + '/users/:userId',function (req, res, next) {
+        utils.getHandlerInstance(req,res,entityDetails);
+      });
+      app.param(['userId'], function (req, res, next, value) {
+        req.entityId=value;
+        next();
       });
  };
  

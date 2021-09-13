@@ -5,8 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var routes = require('./routes/index');
 var mysqlConnect = require('./models/db/MySqlConnect');
+var multer = require("multer");
+
 
 var app = express();
+var upload = multer();
 
 mysqlConnect.init()
 .then( (db) => {
@@ -22,6 +25,7 @@ mysqlConnect.init()
       app.use(express.urlencoded({ extended: false }));
       app.use(cookieParser());
       app.use(express.static(path.join(__dirname, 'public')));
+      app.use(upload.array());
       
       routes.assignRoutes(app);
       // catch 404 and forward to error handler
