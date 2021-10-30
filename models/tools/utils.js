@@ -73,13 +73,14 @@ exports.validatePermission = function (permission) {
 };
 
 exports.getHandlerInstance = function(request,response,entity){
-    var entityJsons = require('../entityJSON/EntityJSON.json')
-   if(entity && entity.name){
-        request.entity = entityJsons[entity.name];
-        const handler =  require('../handler/'+request.entity.handlers);
-        var entityHandler = new handler();
-        entityHandler.handleAPICall(request,response);
-   }else{
-        request.entity = null;
-   }
+    // const APIRequest = require('../api/APIrequest');
+    // APIRequest.addNecessaryDetailsForRequest(request,response,entity);
+    // var handler = APIRequest.entity.getHandlerInstance();
+    // handler.handleAPICall(APIRequest);
+
+    const APIRequest = require('../api/APIrequest');
+    const req = new APIRequest();
+    req.addNecessaryDetailsForRequest(request,response,entity);
+    var handler = req.entity.getHandlerInstance();
+    handler.handleAPICall(req);
 }

@@ -1,6 +1,7 @@
 var mysql = require("mysql");
 var config = require('../../config.json');
 var QueryBuilder = require("node-querybuilder");
+const APIrequest = require("../api/APIrequest");
 
 function MySQLConnect(){
     this.pool = null;
@@ -11,6 +12,12 @@ function MySQLConnect(){
         "database": config.db_config.database,
         "pool_size": 50
     },'mysql', 'pool');
+
+    // builderObject._exec((sql, cb) =>{
+    //     debugger;
+    //     console.log("query executed");
+    // });
+
     //Init MySql Connection pool
     this.init = function(){
         return new Promise((resolve, reject) => {
@@ -40,9 +47,22 @@ function MySQLConnect(){
         });
     }
 
-    this.runBuilder = function(cbk){
+    this.runBuilder = function(cbk,APIRequest){
         builderObject.get_connection(db => {
-            cbk(db);
+            db.get = function(table, cb, conn){
+                // The table parameter is optional, it could be the cb...
+                if (typeof table === 'function' && typeof cb !== 'function') {
+                    cb = table;
+                }
+            
+                var sql_Query = this._get(table);
+                this.reset_query(sql_Query);
+                const sql = {sql:sql_Query,nestTables: true};
+            
+                if (typeof cb !== "function") return new WrapperPromise(sql, this._exec.bind(this)).promisify();
+                this._exec(sql, cb);
+            }
+            cbk(db,APIrequest);
         });
     }
 }

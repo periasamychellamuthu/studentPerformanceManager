@@ -1,5 +1,7 @@
 {
-    "User":{
+    "user":{
+        "name":"user",
+        "path": "/users",
         "table_name":"Users",
         "handlers":"UserEntityHandler",
         "fields":[
@@ -27,6 +29,33 @@
             {
                 "name":"password",
                 "relational_mapping":"Users.PASS_WORD"
+            }
+        ]
+    },
+    "student":{
+        "name":"student",
+        "path": "/students",
+        "table_name":"Students",
+        "handlers":"UserEntityHandler",
+        "fields":[
+            {
+                "name":"id",
+                "relational_mapping":"Students.ID",
+                "is_identifier":true
+            },
+            {
+                "name":"class",
+                "relational_mapping":"Students.CLASS"
+            },
+            {
+                "name":"section",
+                "relational_mapping":"Students.SECTION"
+            },
+            {
+                "name":"users",
+                "entity":"user",
+                "relational_mapping":"Users.ID",
+                "ForeignKey_mapping":"Students.USER_ID=Users.ID"
             }
         ]
     }

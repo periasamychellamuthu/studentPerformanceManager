@@ -132,13 +132,32 @@ function setReturningColumns(qb,columns){
 } 
 function getSelectColumnForSelectQuery(request,qb){
     var entity = request.entity;
+    var entityId = request.entityId;
+    var navigationInfo = request.navigationInfo;
     var columns =[];
-    entity.fields.forEach((field,index) => {
-        columns.push(field.relational_mapping.split(".")[1]);
-        // columns.push('`'+field.relational_mapping+"` AS `"+field.name+'`');
-    });
-    qb.select(columns);
+    function addColumns(entity){
+        entity.fields.forEach((field,index) => {
+            columns.push(field.relational_mapping.split(".")[1]);
+            // columns.push('`'+field.relational_mapping+"` AS `"+field.name+'`');
+        });
+        qb.select(columns);
+    }
+    addColumnsAndJoinBasedOnNavigationInfo(entity,entityId,navigationInfo,qb,addColumns);
 }
+
+function addColumnsAndJoinBasedOnNavigationInfo(entity,entityId,navigationInfo,qb,cbk){
+    // if(navigationInfo.index(entity)!=-1){
+    //     navigationInfo.splice(navigationInfo.index(entity),1);
+    // }
+    // if(navigationInfo.index(entityId)!=-1){
+    //     navigationInfo.splice(navigationInfo.index(entityId),1);
+    // }
+    // cbk(entity);
+
+
+}
+
+
 
 function getTablename(request){
     return request.entity.table_name;
